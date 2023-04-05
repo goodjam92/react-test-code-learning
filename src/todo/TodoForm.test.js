@@ -6,17 +6,27 @@ afterEach(() => {
 });
 
 describe("<TodoForm />", () => {
+  const setup = (props = {}) => {
+    const utils = render(<TodoForm {...props} />);
+    const input = screen.getByPlaceholderText("할일을 입력해주세요");
+    const button = screen.getByText("등록");
+    return {
+      ...utils,
+      input,
+      button,
+    };
+  };
+
   /* 1 */
   it("has input and a button", () => {
-    render(<TodoForm />);
-    screen.getByPlaceholderText("할일을 입력해주세요");
-    screen.getByText("등록");
+    const { input, button } = setup();
+    expect(input).toBeTruthy();
+    expect(button).toBeTruthy();
   });
 
   /* 2 */
   it("changes input", () => {
-    render(<TodoForm />);
-    const input = screen.getByPlaceholderText("할일을 입력해주세요");
+    const { input } = setup();
 
     fireEvent.change(input, {
       target: {
@@ -25,13 +35,11 @@ describe("<TodoForm />", () => {
     });
     expect(input).toHaveAttribute("value", "TDD 배우기");
   });
+
   /* 3 */
   it("calls onInsert and clears input", () => {
     const onInsert = jest.fn();
-    render(<TodoForm onInsert={onInsert} />);
-
-    const input = screen.getByPlaceholderText("할일을 입력해주세요");
-    const button = screen.getByText("등록");
+    const { input, button } = setup({ onInsert });
 
     fireEvent.change(input, {
       target: {
