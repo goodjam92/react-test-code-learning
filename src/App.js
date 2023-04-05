@@ -1,12 +1,10 @@
 import "./App.css";
-import Counter from "./Counter";
-import Profile from "./Profile";
+import HookCounter from "./HookCounter";
 
 function App() {
   return (
     <div>
-      <Profile userName={"goodjam"} name={"JAEMO KOO"} />
-      <Counter />
+      <HookCounter />
     </div>
   );
 }
