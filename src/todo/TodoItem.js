@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import React, { useCallback } from "react";
 
 const TodoItem = ({ todo, onToggle, onRemove }) => {
   const { id, text, done } = todo;
@@ -18,4 +18,4 @@ const TodoItem = ({ todo, onToggle, onRemove }) => {
   );
 };
 
-export default TodoItem;
+export default React.memo(TodoItem);
